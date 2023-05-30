@@ -10,7 +10,7 @@ QUEUE_NAME = 'passwords'
 app = Chalice(app_name='ww')
 app.debug = True
 
-def verify_pass_word(password):
+def check_pass_word(password):
 	if len(password) < 8:
 		return False
 	if not any(char.isdigit() for char in password):
@@ -23,20 +23,27 @@ def verify_pass_word(password):
 		return False
 	return True
 
+def get_password_SQS(event):
+	for record in event:
+		SQS = boto3.client("sqs", endpoint_url=ENDPOINT_URL_SEND)
+		password = record.body
+		return password
+
 @app.on_sqs_message(queue=QUEUE_NAME)
 def on_event(event):
 	try:
 		for record in event:
-			# app.log.debug("Received message with contents: %s", vars(record))
-			# app.log.debug("Received message with contents wagratom: %s", record.eventSourceARN)
-			SQS = boto3.client("sqs", endpoint_url='http://host.docker.internal:4566')
-			input_message = record.body
-			app.log.info("The message is: " + input_message)
-			output_message = input_message.upper()
-			queueURL = SQS.get_queue_url(QueueName=QUEUE_NAME).get('QueueUrl')
-			resp = SQS.send_message(QueueUrl=queueURL, MessageBody=output_message)
+			password = get_password_SQS(event)
+			app.log.debug("Password: %s", password)
+			if check_pass_word(password):
+				app.log.debug("Password Valida")
+			else:
+				app.log.debug("Senha errada rapa")
 	except Exception as e:
 		print(str(e))
+
+# app.log.debug("Received message with contents: %s", vars(record))
+# app.log.debug("Received message with contents wagratom: %s", record.eventSourceARN)
 
 # awslocal sqs create-queue --queue-name passwords
 # awslocal sqs list-queues
