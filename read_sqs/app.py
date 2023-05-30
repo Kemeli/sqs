@@ -9,27 +9,26 @@ QUEUE_NAME = 'passwords'
 
 app = Chalice(app_name='ww')
 app.debug = True
-"""
-{'_event_dict': {
-	'body': 'transforma',
-	'receiptHandle': 'YjNlNTRkY2EtOTYyYi00MDc1LTlkNTEtNzA4ODhjNjkyZDZiIGFybjphd3M6c3FzOnVzLWVhc3QtMTowMDAwMDAwMDAwMDA6cGFzc3dvcmRzIGUwZmQxZmIyLWYyZTItNGEwYy1hMjE0LTczY2UwMzY0MjM4ZCAxNjg1NDYwMzU4LjI5Njg1MzU=',
-	'md5OfBody': '6c141f9e2921dd4ec07cda05b0e96a89',
-	'eventSourceARN': 'arn:aws:sqs:us-east-1:000000000000:passwords',
-	'eventSource': 'aws:sqs',
-	'awsRegion': 'us-east-1',
-	'messageId': 'e0fd1fb2-f2e2-4a0c-a214-73ce0364238d',
-	'attributes': {'SenderId': '000000000000',
-	'SentTimestamp': '1685460357493',
-	'ApproximateReceiveCount': '1',
-	'ApproximateFirstReceiveTimestamp': '1685460358296'}, 'messageAttributes': {}}, 'context': <__main__.LambdaContext object at 0x7f444b066bb0>, 'body': 'transforma',
-	'receipt_handle': 'YjNlNTRkY2EtOTYyYi00MDc1LTlkNTEtNzA4ODhjNjkyZDZiIGFybjphd3M6c3FzOnVzLWVhc3QtMTowMDAwMDAwMDAwMDA6cGFzc3dvcmRzIGUwZmQxZmIyLWYyZTItNGEwYy1hMjE0LTczY2UwMzY0MjM4ZCAxNjg1NDYwMzU4LjI5Njg1MzU='}
-"""
+
+def verify_pass_word(password):
+	if len(password) < 8:
+		return False
+	if not any(char.isdigit() for char in password):
+		return False
+	if not any(char.isupper() for char in password):
+		return False
+	if not any(char.islower() for char in password):
+		return False
+	if not any(not char.isalnum() for char in password):
+		return False
+	return True
+
 @app.on_sqs_message(queue=QUEUE_NAME)
 def on_event(event):
 	try:
 		for record in event:
-			app.log.debug("Received message with contents: %s", vars(record))
-			app.log.debug("Received message with contents wagratom: %s", record.eventSourceARN)
+			# app.log.debug("Received message with contents: %s", vars(record))
+			# app.log.debug("Received message with contents wagratom: %s", record.eventSourceARN)
 			SQS = boto3.client("sqs", endpoint_url='http://host.docker.internal:4566')
 			input_message = record.body
 			app.log.info("The message is: " + input_message)
