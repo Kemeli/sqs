@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+		}
+
+		h2 {
+			text-align: center;
+		}
+		.container {
+			width: 300px;
+			margin: 0 auto;
+			padding: 20px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+		}
+
+		.form-group {
+			margin-bottom: 10px;
+		}
+
+		.form-group label {
+			display: block;
+			font-weight: bold;
+		}
+
+		.form-group input[type="text"],
+		.form-group input[type="password"],
+		.form-group input[type="email"] {
+			width: 100%;
+			padding: 5px;
+			border: 1px solid #ccc;
+			border-radius: 3px;
+			background-color: rgb(225, 225, 225) /* Adicione essa linha */
+		}
+
+		.form-group input[type="submit"] {
+			width: 100%;
+			padding: 10px;
+			background-color: #4CAF50;
+			color: #fff;
+			border: none;
+			border-radius: 3px;
+			cursor: pointer;
+		}
+
+		.form-group input[type="submit"]:hover {
+			background-color: #45a049;
+		}
+
+		.form-group input::placeholder {
+			color: #888;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h2>Register</h2>
+		<form id="loginForm">
+			<div class="form-group">
+				<label for="username">Username:</label>
+				<input type="text" id="username" name="username" placeholder="Enter username" required>
+			</div>
+			<div class="form-group">
+				<label for="email">Email:</label>
+				<input type="email" id="email" name="email" placeholder="Enter email" required>
+			</div>
+			<div class="form-group">
+				<label for="password">Password:</label>
+				<input type="password" id="password" name="password" placeholder="Enter password" required>
+			</div>
+			<div class="form-group">
+				<input type="submit" value="Register">
+			</div>
+		</form>
+	</div>
+
+	<script>
+		document.getElementById('loginForm').addEventListener('submit', function(event) {
+			event.preventDefault(); // Prevent the default form submission
+
+			// Capture the form values
+			var username = document.getElementById('username').value;
+			var email = document.getElementById('email').value;
+			var password = document.getElementById('password').value;
+
+			// Create a JSON object with the form values
+			var data = {
+				Login: username,
+				Email: email,
+				Senha: password
+			};
+
+			// Send a POST request using AJAX
+			var xhr = new XMLHttpRequest();
+			xhr.open('POST', '/api/cadastro');
+			xhr.setRequestHeader('Content-Type', 'application/json');
+			xhr.onload = function() {
+				if (xhr.status === 200) {
+					var response = JSON.parse(xhr.responseText);
+					alert(response.message); // Show the API response message
+				} else {
+					alert('Error in registration.'); // Show an error message
+				}
+			};
+			xhr.send(JSON.stringify(data));
+		});
+	</script>
+</body>
+</html>

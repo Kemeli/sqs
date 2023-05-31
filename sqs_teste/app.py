@@ -71,6 +71,13 @@ def send_message(body):
 	except Exception as e:
 		return (str(e))
 
+@app.route('/register', methods=['GET'])
+def register():
+	with open('./register.html') as f:
+		content =  f.read()
+	headers = {'Content-Type': 'text/html'}
+	return Response(body=content, headers=headers)
+
 @app.route('/index', methods=['GET'])
 def index():
 	with open('./index.html') as f:
