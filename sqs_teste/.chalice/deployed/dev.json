@@ -14,8 +14,8 @@
     {
       "name": "rest_api",
       "resource_type": "rest_api",
-      "rest_api_id": "r965nezj95",
-      "rest_api_url": "https://r965nezj95.execute-api.us-east-1.amazonaws.com/api/"
+      "rest_api_id": "qtq8murgw5",
+      "rest_api_url": "https://qtq8murgw5.execute-api.us-east-1.amazonaws.com/api/"
     }
   ],
   "schema_version": "2.0",

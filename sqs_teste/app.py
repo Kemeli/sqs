@@ -3,6 +3,7 @@ import boto3
 import json
 import os
 import sys
+from time import sleep as time
 
 # ENDPOINT_URL_RECEIVE = "http://host.docker.internal:4566/_aws/sqs/messages"
 ENDPOINT_INTERNAL ='http://host.docker.internal:4566'
@@ -32,22 +33,33 @@ def get_dynamodb(dynamo_name):
 	dynamo_client = boto3.resource('dynamodb', endpoint_url=ENDPOINT_INTERNAL)
 	return dynamo_client.Table(dynamo_name)
 
+def set_messege_null(login):
+	table = get_dynamodb(TABLE_NAME)
+	response = table.put_item(
+		Item={
+			'Login': login,
+			'Message': 'NULL'
+			}
+		)
+
+def get_message_password(login):
+	table = get_dynamodb(TABLE_NAME)
+	response = table.get_item(
+		Key={
+			'Login': login
+		}
+	)
+	return response['Item']['Message']
+
 @app.route('/cadastro/{login}', methods=['GET'])
 def get_response(login):
 	try:
-		table = get_dynamodb(TABLE_NAME)
-		response = table.get_item(
-			Key={
-				'Login': login
-			}
-		)
-		item = response['Item']
-		app.log.debug("Item: %s", item)
-		message = item['Message']
-		app.log.debug("Message: %s", message)
-		return message
+		status = get_message_password(login)
+		set_messege_null(login)
+		app.log.debug("Message: %s", status)
+		return {'message': status}
 	except Exception as e:
-		app.log.error("Error in get response: %s", str(e))
+		return {'message': str(e)}
 
 def send_message(body):
 	try:
@@ -66,12 +78,18 @@ def index():
 	headers = {'Content-Type': 'text/html'}
 	return Response(body=content, headers=headers)
 
-
 @app.route('/cadastro', methods=['POST'])
 def receive_data():
 	try:
 		body = app.current_request.json_body
 		send_message(body)
-		return f"Seu login está sendo processado, Você pode acompanhar o status em: /cadastro/{(body['Login'])}"
+		response = {
+			'message': f"Seu login está sendo processado. Você pode acompanhar o status em: /cadastro/{body['Login']}"
+		}
+		redirect_url = f"cadastro/{body['Login']}"
+		headers = {'Location': redirect_url}
+		return Response(body=response, status_code=302, headers=headers)
 	except Exception as e:
 		return (str(e))
+
+
