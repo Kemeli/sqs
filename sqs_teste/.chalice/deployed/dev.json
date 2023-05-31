@@ -7,11 +7,6 @@
       "role_name": "sqs_teste-dev"
     },
     {
-      "name": "receive_message_sqs",
-      "resource_type": "lambda_function",
-      "lambda_arn": "arn:aws:lambda:us-east-1:000000000000:function:sqs_teste-dev-receive_message_sqs"
-    },
-    {
       "name": "api_handler",
       "resource_type": "lambda_function",
       "lambda_arn": "arn:aws:lambda:us-east-1:000000000000:function:sqs_teste-dev"
@@ -19,8 +14,8 @@
     {
       "name": "rest_api",
       "resource_type": "rest_api",
-      "rest_api_id": "4wtrtikjkr",
-      "rest_api_url": "https://4wtrtikjkr.execute-api.us-east-1.amazonaws.com/api/"
+      "rest_api_id": "r965nezj95",
+      "rest_api_url": "https://r965nezj95.execute-api.us-east-1.amazonaws.com/api/"
     }
   ],
   "schema_version": "2.0",
