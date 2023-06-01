@@ -14,8 +14,8 @@
     {
       "name": "rest_api",
       "resource_type": "rest_api",
-      "rest_api_id": "dipyie6wax",
-      "rest_api_url": "https://dipyie6wax.execute-api.us-east-1.amazonaws.com/api/"
+      "rest_api_id": "zwp3hl6ago",
+      "rest_api_url": "https://zwp3hl6ago.execute-api.us-east-1.amazonaws.com/api/"
     }
   ],
   "schema_version": "2.0",

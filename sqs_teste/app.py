@@ -59,7 +59,7 @@ def get_response(login):
 		app.log.debug("Message: %s", status)
 		return {'message': status}
 	except Exception as e:
-		return {'message': str(e)}
+		return {'message': 'login não encontrado'}
 
 def send_message(body):
 	try:
@@ -100,4 +100,4 @@ def receive_data():
 		return (str(e))
 
 
-@app.route('/fluxograma.png/', methods=['GET'])
+# @app.route('/fluxograma.png/', methods=['GET'])
