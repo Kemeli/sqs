@@ -1,348 +1,126 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8">
-	<style>
-	:root {
-		--chocolate: #d2691e;
-		--darkSalmon: #e9967a;
-		--indianRed: #cd5c5c;
-		--seaShell: #fff5ee;
-		--yellow: #ffeb3b;
-		--wheat: #f5deb3;
-	}
-
-	/* Typography */
-	html {
-		font: 16px 'Indie Flower';
-	}
-
-	h1 {
-		font-size: 2.5em;
-	}
-
-	h2 {
-		font-size: 2.25em;
-	}
-
-	h3 {
-		font-size: 2em;
-	}
-
-	h4 {
-		font-size: 1.75em;
-	}
-
-	p {
-		font-size: 1.5em;
-	}
-
-	/* Base */
-	* {
-		box-sizing: border-box;
-	}
-
-	html, body {
-		width: 100%;
-		height: 100%;
-	}
-
-	/* Layout */
-	.wrapper {
-		position: relative;
-		width: 100%;
-		height: 100%;
-	}
-
-	.content {
-		width: 60%;
-	}
-
-	/* Navigation */
-	nav {
-		float: right;
-		width: 5%;
-		min-height: 100%;
-		background: var(--darkSalmon);
-		color: #fff;
-		overflow: hidden;
-		transition: width 0.5s ease;
-	}
-
-	nav label {
-		display: block;
-		position: relative;
-		width: 100%;
-		padding: 0.25em 0;
-		height: 2.5em;
-		cursor: pointer;
-	}
-
-	nav label:before {
-		content: "\f0c9";
-		position: absolute;
-		width: 100%;
-		font-family: fontAwesome;
-		font-size: 2em;
-		text-align: center;
-		text-shadow: 2px 2px 0 #666;
-		transition: all 0.5s ease;
-	}
-
-	nav label:hover:before {
-		text-shadow: none;
-	}
-
-	:target {
-		z-index: 2;
-		opacity: 1;
-	}
-
-	/* Hiding mechanism */
-	input {
-		display: none;
-	}
-
-	input:checked ~ section {
-		width: 85%;
-	}
-
-	input:checked ~ nav {
-		width: 15%;
-	}
-
-	input:checked ~ nav > label:before {
-		content: "\f00d";
-	}
-
-	input:checked ~ nav > label + .navigation {
-		display: flex;
-	}
-
-	/* Sections */
-	section {
-		position: absolute;
-		top: 0;
-		left: 0;
-		z-index: 0;
-		width: 95%;
-		min-height: 100%;
-		opacity: 0;
-		overflow: hidden;
-		transition: width 0.5s, opacity 0.5s;
-	}
-
-	.content {
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		margin: auto;
-	}
-
-	/* Home */
-	.sec-home {
-		float: left;
-		position: relative;
-		background: var(--seaShell);
-		color: var(--darkSalmon);
-		opacity: 1;
-	}
-
-	.sec-home a {
-		color: #eda790;
-		text-decoration-style: dashed;
-	}
-
-	.sec-home a:hover {
-		color: #e58564;
-	}
-	.sec-home a:active {
-		color: #eda790;
-	}
-
-	.sec-home .content {
-		height: 50%;
-		text-align: center;
-	}
-
-	/* About */
-	.sec-about {
-		background: var(--indianRed);
-		color: #fff;
-	}
-
-	.sec-about .content {
-		height: 55%;
-		text-align: center;
-	}
-
-	/* Portfolio */
-	.sec-portfolio {
-		background: var(--yellow);
-		overflow: hidden;
-	}
-
-	.sec-portfolio .col-big {
-		float: left;
-		position: relative;
-		width: 25%;
-		height: 20vw;
-	}
-
-	.sec-portfolio img {
-		display: block;
-		width: 100%;
-		height: 100%;
-		opacity: 0.1;
-		transition: all 0.5s ease;
-	}
-
-	.sec-portfolio img:hover {
-		opacity: 1;
-	}
-
-	/* Contact */
-	.sec-contact {
-		background: var(--wheat);
-	}
-
-	.soc-media {
-		display: flex;
-		justify-content: center;
-		align-content: center;
-		align-items: center;
-		align-self: center;
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-	}
-
-	.soc-media li {
-		float: left;
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<style>
+		body {
+			font-family: Arial, Helvetica, sans-serif;
+			background-color: #f5deb3;
 		}
 
-	.soc-media li:not(:first-child) a {
-		margin-left: 0.75em;
-	}
+		* {
+			box-sizing: border-box;
+		}
 
-	.soc-media a {
-		display: block;
-		color: #aaa;
-		font-size: 3em;
-		text-decoration: none;
-		transition: color 0.5s ease;
-	}
+		.container {
+			padding: 16px;
+			background-color: white;
+		}
 
-	.soc-media a:hover {
-		color: #333;
-	}
+		input[type=text], input[type=password] {
+			width: 100%;
+			padding: 15px;
+			margin: 5px 0 22px 0;
+			display: inline-block;
+			border: none;
+			background: #f1f1f1;
+		}
 
-	.soc-media a:active {
-		color: #666;
-	}
-	</style>
-</head>
-<div class="wrapper">
-  <input type="checkbox" name="nav-check" id="nav-check" />
-  <section class="sec-about" id="sec-about">
-    <div class="content">
-      <h1>who am i?</h1>
-      <p>my name is alex devero.</p>
-      <p>i am web designer and developer.</p>
-      <p>over the years of everyday practice,</p>
-      <p>i built solid expertise in html, css and javascript.</p>
-      <p>i focus on creating clean and unique design.</p>
-    </div>
-  </section>
-  <section class="sec-portfolio" id="sec-portfolio">
-    <div class="row">
-      <div class="col-big"><img src="http://alexdevero.com/img/_Paraguay--demo--05-paraguay.png" alt="Project Paraguay snapshot" /></div>
-      <div class="col-big"><img src="http://alexdevero.com/img/_Smoothie--demo--04-smoothie.png" alt="Project Smoothie snapshot" /></div>
-    </div>
-    <div class="row">
-      <div class="col-big"><img src="http://alexdevero.com/img/_Stilleto--demo--05-stilleto.png" alt="Project Stilleto  snapshot" /></div>
-      <div class="col-big"><img src="http://alexdevero.com/img/_Salamander--demo--03-salamander.png" alt="Project Salamander snapshot" /></div>
-    </div>
-  </section>
-  <section class="sec-contact" id="sec-contact">
-    <ul class="soc-media">
-      <li><a href="https://twitter.com/AlexDevero" class="fa fa-twitter" target="_blank"></a></li>
-      <li><a href="https://www.facebook.com/lex.devero" class="fa fa-facebook" target="_blank"></a></li>
-      <li><a href="http://postman0.deviantart.com/" class="fa fa-deviantart" target="_blank"></a></li>
-      <li><a href="https://www.behance.net/d3v3r0" class="fa fa-behance" target="_blank"></a></li>
-      <li><a href="mailto:deveroalex@gmail.com" class="fa fa-envelope"></a></li>
-    </ul>
-  </section>
-  <section class="sec-home" id="sec-home">
-    <div class="content">
-      <h1>hi and welcome on my portfolio.</h1>
-      <h2><a href="#sec-about">who</a> am i?</h2>
-      <h2><a href="#sec-portfolio">what</a> i do?</h2>
-      <h2><a href="#sec-contact">where</a> to find me?</h2>
-    </div>
-  </section>
-  <nav role="navigation">
-    <label for="nav-check"></label>
-    <ul class="navigation">
-      <li><a href="#sec-home">home</a></li>
-      <li><a href="#sec-about">about</a></li>
-      <li><a href="#sec-portfolio">portfolio</a></li>
-      <li><a href="#sec-contact">contact</a></li>
-    </ul>
-  </nav>
-</div>
-<body>
-	<div class="wrapper">
-		<nav>
-			<label for="toggle-nav"></label>  ####verificar
-			<div class="navigation">
-			<a href="#home">Home</a>
-			<a href="#about">About</a>
-			<a href="#portfolio">Portfolio</a>
-			<a href="#contact">Contact</a>
-	  </div>
-	</nav>
-	<input type="checkbox" id="toggle-nav">
+		input[type=text]:focus, input[type=password]:focus {
+			background-color: #ddd;
+			outline: none;
+		}
 
-	<section id="home" class="sec-home">
-		<div class="content">
-			<h1>Welcome to my website!</h1>
-			<p>Feel free to explore and learn more about me.</p>
-			<a href="#about">Learn More</a>
-		</div>
-	</section>
+		hr {
+			border: 1px solid #f1f1f1;
+			margin-bottom: 25px;
+		}
 
-	<section id="about" class="sec-about">
-		<div class="content">
-			<h2>About Me</h2>
-			<h2>Sobre</h2>
-			<p>Este aplicativo foi construído utilizando AWS Lambda, API Gateway, DynamoDB e SQS.</p>
-			<p>Ele oferece um sistema de cadastro de senhas, onde os usuários podem enviar suas senhas e verificar se atendem aos requisitos de política de senhas.</p>
-			<p>Quando um usuário envia uma senha, ela é enviada para uma fila para processamento. Outra função Lambda processa a senha e verifica se ela está de acordo com a política de senhas. O resultado é armazenado em uma tabela do DynamoDB associada ao login do usuário.</p>
-			<p>Os usuários recebem uma notificação de sua senha em tempo real ou por email.</p>
-			<p>Este aplicativo demonstra o uso de tecnologias serverless para gerenciamento de senhas e mostra como os serviços da AWS podem ser integrados para criar aplicativos escaláveis e robustos.</p>
+		.registerbtn {
+			background-color: #04AA6D;
+			color: white;
+			padding: 16px 20px;
+			margin: 8px 0;
+			border: none;
+			cursor: pointer;
+			width: 100%;
+			opacity: 0.9;
+		}
 
-			<a href="#portfolio">View Portfolio</a>
-		</div>
-	</section>
+		.registerbtn:hover {
+			opacity: 1;
+		}
 
-	<section id="portfolio" class="sec-portfolio">
-		<div class="content">
-			<h2>Portfolio</h2>
-			<div class="col-big">
-				<img src="portfolio-image1.jpg" alt="Portfolio Image 1">
+		a {
+			color: dodgerblue;
+		}
+
+		.signin {
+			background-color: #f1f1f1;
+			text-align: center;
+		}
+		</style>
+	</head>
+	<body>
+
+		<form action="/action_page.php">
+			<div class="container">
+				<h1>Register</h1>
+				<p>Please fill in this form to create an account.</p>
+				<hr>
+
+				<label for="username"><b>Username</b></label>
+				<input type="text" placeholder="Enter Username" name="username" id="username" required>
+
+				<label for="email"><b>Email</b></label>
+				<input type="text" placeholder="Enter Email" name="email" id="email" required>
+
+				<label for="psw"><b>Password</b></label>
+				<input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+
+				<label for="psw-repeat"><b>Repeat Password</b></label>
+				<input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
+				<hr>
+				<p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+
+				<button type="submit" class="registerbtn">Register</button>
 			</div>
-			<div class="col-big">
-				<img src="portfolio-image2.jpg" alt="Portfolio Image 2">
-			</div>
-			<div class="col-big">
-				<img src="portfolio-image3.jpg" alt="Portfolio Image 3">
-			</div>
-		</div>
-	</section>
-</div>
 
+			<div class="container signin">
+				<p>Already have an account? <a href="#">Sign in</a>.</p>
+			</div>
+		</form>
+
+		<script>
+			document.querySelector('form').addEventListener('submit', function(event) {
+				event.preventDefault(); // Prevent the default form submission
+
+				// Capture the form values
+				var username = document.getElementById('username').value;
+				var email = document.getElementById('email').value;
+				var password = document.getElementById('psw').value;
+
+				// Create a JSON object with the form values
+				var data = {
+					Login: username,
+					Email: email,
+					Senha: password
+				};
+
+				// Send a POST request using AJAX
+				var xhr = new XMLHttpRequest();
+				xhr.open('POST', '/api/cadastro');
+				xhr.setRequestHeader('Content-Type', 'application/json');
+				xhr.onload = function() {
+					if (xhr.status === 200) {
+						var response = JSON.parse(xhr.responseText);
+						alert(response.message); // Show the API response message
+					} else {
+						alert('Error in registration.'); // Show an error message
+					}
+				};
+				xhr.send(JSON.stringify(data));
+			});
+		</script>
+	</body>
+</html>

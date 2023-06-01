@@ -1,126 +1,133 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<style>
-		body {
-			font-family: Arial, Helvetica, sans-serif;
-			background-color: #f5deb3;
-		}
 
-		* {
-			box-sizing: border-box;
-		}
 
-		.container {
-			padding: 16px;
-			background-color: white;
-		}
+<!doctype html>
+<!-- Template from https://getbootstrap.com/docs/4.3/getting-started/introduction/ -->
 
-		input[type=text], input[type=password] {
-			width: 100%;
-			padding: 15px;
-			margin: 5px 0 22px 0;
-			display: inline-block;
-			border: none;
-			background: #f1f1f1;
-		}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-		input[type=text]:focus, input[type=password]:focus {
-			background-color: #ddd;
-			outline: none;
-		}
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+     body {
+            background-image: url("https://42.fr/wp-content/uploads/2021/07/Background-RM-2000x1132.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+    .transparent{
+      background-color: rgba(5, 3, 14, 0.5);;
+      border-color: transparent;
+      color: whitesmoke; /* opcional - define a cor do texto para legibilidade */
+    }
 
-		hr {
-			border: 1px solid #f1f1f1;
-			margin-bottom: 25px;
-		}
+    .no-background {
+      background-color: transparent !important;
+      border-color: transparent !important;
+      box-shadow: none !important;
+    }
+    .no-background:focus {
+      background-color: transparent !important;
+      border-color: transparent !important;
+      box-shadow: none !important;
+    }
 
-		.registerbtn {
-			background-color: #04AA6D;
-			color: white;
-			padding: 16px 20px;
-			margin: 8px 0;
-			border: none;
-			cursor: pointer;
-			width: 100%;
-			opacity: 0.9;
-		}
+    .custom-input {
+      color: whitesmoke !important; /* Altere a cor do texto aqui */
+    }
 
-		.registerbtn:hover {
-			opacity: 1;
-		}
+    .custom-input:focus {
+      color: whitesmoke !important;
+    }
 
-		a {
-			color: dodgerblue;
-		}
+    .custom-input:not(:focus) {
+      color: whitesmoke !important;
+    }
 
-		.signin {
-			background-color: #f1f1f1;
-			text-align: center;
-		}
-		</style>
-	</head>
-	<body>
+  </style>
+  </head>
+  <body>
 
-		<form action="/action_page.php">
-			<div class="container">
-				<h1>Register</h1>
-				<p>Please fill in this form to create an account.</p>
-				<hr>
+    <div class="card m-2 p-0 transparent">
+      <img src="https://biolibre.fr/media/cache/articleMainImg/images/articles/school_42.jpeg"
+        alt="logo 42" class="card-img-top w-25">
+      <div class="card-body">
+        <h5 class="card-title">System KWS Register</h5>
+      </div>
+    </div>
 
-				<label for="username"><b>Username</b></label>
-				<input type="text" placeholder="Enter Username" name="username" id="username" required>
+    <!-- Main form -->
+  <div class="card card-body transparent">
+    <div class="card-body">
+    <form method="POST">
 
-				<label for="email"><b>Email</b></label>
-				<input type="text" placeholder="Enter Email" name="email" id="email" required>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="name" class="form-control transparent no-background custom-input" id="Login"  placeholder="Your name">
+        </div>
 
-				<label for="psw"><b>Password</b></label>
-				<input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+        <div class="form-group">
+            <label for="password">password</label>
+            <input type="password" class="form-control transparent no-background custom-input" id="Senha"  placeholder="Your password">
+        </div>
 
-				<label for="psw-repeat"><b>Repeat Password</b></label>
-				<input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
-				<hr>
-				<p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" class="form-control transparent no-background custom-input" id="Email"  placeholder="Enter email">
+        </div>
 
-				<button type="submit" class="registerbtn">Register</button>
-			</div>
+      <h4 id="response"></h4>
+      <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+    </div>
+  </div>
 
-			<div class="container signin">
-				<p>Already have an account? <a href="#">Sign in</a>.</p>
-			</div>
-		</form>
+  <script>
+    (() => {
+      const form = document.querySelector('form');
+      const submitResponse = document.querySelector('#response');
 
-		<script>
-			document.querySelector('form').addEventListener('submit', function(event) {
-				event.preventDefault(); // Prevent the default form submission
+      form.onsubmit = e => {
+        e.preventDefault();
 
-				// Capture the form values
-				var username = document.getElementById('username').value;
-				var email = document.getElementById('email').value;
-				var password = document.getElementById('psw').value;
+        // Capture the form data
+        let data = {};
+        Array.from(form).map(input => (data[input.id] = input.value));
+        console.log('Sending: ', JSON.stringify(data));
+        submitResponse.innerHTML = 'Sending...'
 
-				// Create a JSON object with the form values
-				var data = {
-					Login: username,
-					Email: email,
-					Senha: password
-				};
+        // Create the AJAX request
+        var xhr = new XMLHttpRequest();
+        xhr.open(form.method, '/api/cadastro');
+        xhr.setRequestHeader('Accept', 'application/json; charset=utf-8');
+        xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 
-				// Send a POST request using AJAX
-				var xhr = new XMLHttpRequest();
-				xhr.open('POST', '/api/cadastro');
-				xhr.setRequestHeader('Content-Type', 'application/json');
-				xhr.onload = function() {
-					if (xhr.status === 200) {
-						var response = JSON.parse(xhr.responseText);
-						alert(response.message); // Show the API response message
-					} else {
-						alert('Error in registration.'); // Show an error message
-					}
-				};
-				xhr.send(JSON.stringify(data));
-			});
-		</script>
-	</body>
+        // Send the collected data as JSON
+        xhr.send(JSON.stringify(data));
+
+        xhr.onloadend = response => {
+          if (response.target.status === 200) {
+            form.reset();
+            submitResponse.innerHTML =
+              `<span class="text-info">Sua solicitação está sendo processada!</br>
+               Enviaremos o resultado para: </span>
+               <em class="text-danger">
+                ${data['Email']}</em>`;
+          } else {
+            submitResponse.innerHTML = 'Error! Please try again.';
+            console.error(JSON.parse(response));
+          }
+        };
+      };
+    })();
+  </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
 </html>
