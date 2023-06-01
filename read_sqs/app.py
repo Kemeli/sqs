@@ -28,8 +28,9 @@ def get_dynamodb(dynamo_name):
 	return dynamo_client.Table(dynamo_name)
 
 def saving_user_in_db(login, message):
-	app.log.info("Saving Item in DynamoDB")
-
+	app.log.info("Saving Log in DynamoDB")
+	app.log.debug("Login: %s", login)
+	app.log.debug("Message: %s", message)
 	table = get_dynamodb(TABLE_NAME)
 	response = table.put_item(
 		Item={

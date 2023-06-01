@@ -15,7 +15,7 @@
       "name": "on_event-sqs-event-source",
       "resource_type": "sqs_event",
       "queue_arn": "arn:aws:sqs:us-east-1:000000000000:passwords",
-      "event_uuid": "adc6bf28-9a05-4dde-baae-66a13c189f78",
+      "event_uuid": "1ef7b669-4bfa-4096-8c2f-30b8b9e3f998",
       "queue": "passwords",
       "lambda_arn": "arn:aws:lambda:us-east-1:000000000000:function:read_sqs-dev-on_event"
     }

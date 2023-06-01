@@ -9,12 +9,16 @@ awslocal dynamodb create-table \
     --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 \
     --region us-east-1
 
-echo "Creating table passwords"
+echo "Creating SQS passwords"
 awslocal sqs create-queue --queue-name passwords
-awslocal sqs create-queue --queue-name responses
 
+echo "Subindo lambdas read"
 cd ./read_sqs
 chalice-local deploy
 
+echo "Subindo lambdas write"
 cd ../sqs_teste
-chalice-local deploy && chalice-local local
+chalice-local deploy
+
+awslocal s3api create-bucket --bucket resource
+awslocal s3 cp ./vendor/fluxograma.png s3://resource/fluxograma.png
