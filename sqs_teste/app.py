@@ -78,7 +78,7 @@ def register():
 	headers = {'Content-Type': 'text/html'}
 	return Response(body=content, headers=headers)
 
-@app.route('/index', methods=['GET'])
+@app.route('/', methods=['GET'])
 def index():
 	with open('./index.html') as f:
 		content =  f.read()
@@ -100,3 +100,4 @@ def receive_data():
 		return (str(e))
 
 
+@app.route('/fluxograma.png/', methods=['GET'])

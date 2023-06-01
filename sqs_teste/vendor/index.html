@@ -1,213 +1,214 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <style>
-    :root {
-      --chocolate: #d2691e;
-      --darkSalmon: #e9967a;
-      --indianRed: #cd5c5c;
-      --seaShell: #fff5ee;
-      --yellow: #ffeb3b;
-      --wheat: #f5deb3;
-    }
+	<meta charset="UTF-8">
+	<style>
+	:root {
+		--chocolate: #d2691e;
+		--darkSalmon: #e9967a;
+		--indianRed: #cd5c5c;
+		--seaShell: #fff5ee;
+		--yellow: #ffeb3b;
+		--wheat: #f5deb3;
+	}
 
-    /* Typography */
-    html {
-      font: 16px 'Indie Flower';
-    }
+	/* Typography */
+	html {
+		font: 16px 'Indie Flower';
+	}
 
-    h1 {
-      font-size: 2.5em;
-    }
+	h1 {
+		font-size: 2.5em;
+	}
 
-    h2 {
-      font-size: 2.25em;
-    }
+	h2 {
+		font-size: 2.25em;
+	}
 
-    h3 {
-      font-size: 2em;
-    }
+	h3 {
+		font-size: 2em;
+	}
 
-    h4 {
-      font-size: 1.75em;
-    }
+	h4 {
+		font-size: 1.75em;
+	}
 
-    p {
-      font-size: 1.5em;
-    }
+	p {
+		font-size: 1.5em;
+	}
 
-    /* Base */
-    * {
-      box-sizing: border-box;
-    }
+	/* Base */
+	* {
+		box-sizing: border-box;
+	}
 
-    html, body {
-      width: 100%;
-      height: 100%;
-    }
+	html, body {
+		width: 100%;
+		height: 100%;
+	}
 
-    /* Layout */
-    .wrapper {
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
+	/* Layout */
+	.wrapper {
+		position: relative;
+		width: 100%;
+		height: 100%;
+	}
 
-    .content {
-      width: 60%;
-    }
+	.content {
+		width: 60%;
+	}
 
-    /* Navigation */
-    nav {
-      float: right;
-      width: 5%;
-      min-height: 100%;
-      background: var(--darkSalmon);
-      color: #fff;
-      overflow: hidden;
-      transition: width 0.5s ease;
-    }
+	/* Navigation */
+	nav {
+		float: right;
+		width: 5%;
+		min-height: 100%;
+		background: var(--darkSalmon);
+		color: #fff;
+		overflow: hidden;
+		transition: width 0.5s ease;
+	}
 
-    nav label {
-      display: block;
-      position: relative;
-      width: 100%;
-      padding: 0.25em 0;
-      height: 2.5em;
-      cursor: pointer;
-    }
+	nav label {
+		display: block;
+		position: relative;
+		width: 100%;
+		padding: 0.25em 0;
+		height: 2.5em;
+		cursor: pointer;
+	}
 
-    nav label:before {
-      content: "\f0c9";
-      position: absolute;
-      width: 100%;
-      font-family: fontAwesome;
-      font-size: 2em;
-      text-align: center;
-      text-shadow: 2px 2px 0 #666;
-      transition: all 0.5s ease;
-    }
+	nav label:before {
+		content: "\f0c9";
+		position: absolute;
+		width: 100%;
+		font-family: fontAwesome;
+		font-size: 2em;
+		text-align: center;
+		text-shadow: 2px 2px 0 #666;
+		transition: all 0.5s ease;
+	}
 
-    nav label:hover:before {
-      text-shadow: none;
-    }
+	nav label:hover:before {
+		text-shadow: none;
+	}
 
-    :target {
-      z-index: 2;
-      opacity: 1;
-    }
+	:target {
+		z-index: 2;
+		opacity: 1;
+	}
 
-    /* Hiding mechanism */
-    input {
-      display: none;
-    }
+	/* Hiding mechanism */
+	input {
+		display: none;
+	}
 
-    input:checked ~ section {
-      width: 85%;
-    }
+	input:checked ~ section {
+		width: 85%;
+	}
 
-    input:checked ~ nav {
-      width: 15%;
-    }
+	input:checked ~ nav {
+		width: 15%;
+	}
 
-    input:checked ~ nav > label:before {
-      content: "\f00d";
-    }
+	input:checked ~ nav > label:before {
+		content: "\f00d";
+	}
 
-    input:checked ~ nav > label + .navigation {
-      display: flex;
-    }
+	input:checked ~ nav > label + .navigation {
+		display: flex;
+	}
 
-    /* Sections */
-    section {
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 0;
-      width: 95%;
-      min-height: 100%;
-      opacity: 0;
-      overflow: hidden;
-      transition: width 0.5s, opacity 0.5s;
-    }
+	/* Sections */
+	section {
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 0;
+		width: 95%;
+		min-height: 100%;
+		opacity: 0;
+		overflow: hidden;
+		transition: width 0.5s, opacity 0.5s;
+	}
 
-    .content {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      margin: auto;
-    }
+	.content {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		margin: auto;
+	}
 
-    /* Home */
-    .sec-home {
-      float: left;
-      position: relative;
-      background: var(--seaShell);
-      color: var(--darkSalmon);
-      opacity: 1;
-    }
+	/* Home */
+	.sec-home {
+		float: left;
+		position: relative;
+		background: var(--seaShell);
+		color: var(--darkSalmon);
+		opacity: 1;
+	}
 
-    .sec-home a {
-      color: #eda790;
-      text-decoration-style: dashed;
-    }
+	.sec-home a {
+		color: #eda790;
+		text-decoration-style: dashed;
+	}
 
-    .sec-home a:hover {
-      color: #e58564;
+	.sec-home a:hover {
+		color: #e58564;
 	}
 	.sec-home a:active {
 		color: #eda790;
-	  }
+	}
 
-	  .sec-home .content {
+	.sec-home .content {
 		height: 50%;
 		text-align: center;
-	  }
+	}
 
-	  /* About */
-	  .sec-about {
+	/* About */
+	.sec-about {
 		background: var(--indianRed);
 		color: #fff;
-	  }
+	}
 
-	  .sec-about .content {
+	.sec-about .content {
 		height: 55%;
 		text-align: center;
-	  }
+	}
 
-	  /* Portfolio */
-	  .sec-portfolio {
+	/* Portfolio */
+	.sec-portfolio {
 		background: var(--yellow);
 		overflow: hidden;
-	  }
+	}
 
-	  .sec-portfolio .col-big {
+	.sec-portfolio .col-big {
 		float: left;
 		position: relative;
 		width: 25%;
 		height: 20vw;
-	  }
+	}
 
-	  .sec-portfolio img {
+	.sec-portfolio img {
 		display: block;
 		width: 100%;
 		height: 100%;
 		opacity: 0.1;
 		transition: all 0.5s ease;
-	  }
+	}
 
-	  .sec-portfolio img:hover {
+	.sec-portfolio img:hover {
 		opacity: 1;
-	  }
+	}
 
-	  /* Contact */
-	  .sec-contact {
+	/* Contact */
+	.sec-contact {
 		background: var(--wheat);
-	  }
+	}
 
-	  .soc-media {
+	.soc-media {
 		display: flex;
 		justify-content: center;
 		align-content: center;
@@ -218,73 +219,94 @@
 		right: 0;
 		bottom: 0;
 		left: 0;
-	  }
+	}
 
-	  .soc-media li {
+	.soc-media li {
 		float: left;
-	  }
+		}
 
-	  .soc-media li:not(:first-child) a {
+	.soc-media li:not(:first-child) a {
 		margin-left: 0.75em;
-	  }
+	}
 
-	  .soc-media a {
+	.soc-media a {
 		display: block;
 		color: #aaa;
 		font-size: 3em;
 		text-decoration: none;
 		transition: color 0.5s ease;
-	  }
+	}
 
-	  .soc-media a:hover {
+	.soc-media a:hover {
 		color: #333;
-	  }
+	}
 
-	  .soc-media a:active {
+	.soc-media a:active {
 		color: #666;
-	  }
+	}
 	</style>
 </head>
 <body>
-  <div class="wrapper">
-    <nav>
-      <label for="toggle-nav"></label>
-      <div class="navigation">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#portfolio">Portfolio</a>
-        <a href="#contact">Contact</a>
-      </div>
-    </nav>
-	<input type="checkbox" id="toggle-nav">
+	<div class="wrapper">
+		<input type="checkbox" name="nav-check" id="nav-check" />
+		<section class="sec-about" id="sec-about">
+			<div class="content">
+				<h2>Projeto</h2>
+				<p>Este aplicativo foi construído utilizando AWS Lambda, API Gateway, DynamoDB e SQS.</p>
+				<p>Ele oferece um sistema de cadastro de senhas, onde os usuários podem enviar suas senhas e verificar se atendem aos requisitos de política de senhas.</p>
+				<p>Quando um usuário envia uma senha, ela é enviada para uma fila para processamento. Outra função Lambda processa a senha e verifica se ela está de acordo com a política de senhas. O resultado é armazenado em uma tabela do DynamoDB associada ao login do usuário.</p>
+				<p>Os usuários recebem uma notificação de sua senha em tempo real ou por email.</p>
+				<p>Este aplicativo demonstra o uso de tecnologias serverless para gerenciamento de senhas e mostra como os serviços da AWS podem ser integrados para criar aplicativos escaláveis e robustos.</p>
+			</div>
+		</section>
+		<section class="sec-portfolio" id="sec-portfolio">
+			<div class="row">
+				<div class="col-big"><img src="./fluxograma.png" alt="fluxograma" /></div>
+				<div class="col-big"><img src="./fluxograma.png" alt="Project Smoothie snapshot" /></div>
+			</div>
+			<div class="row">
+				<!-- <div class="col-big"><img src="http://alexdevero.com/img/_Stilleto--demo--05-stilleto.png" alt="Project Stilleto  snapshot" /></div> -->
+				<!-- <div class="col-big"><img src="http://alexdevero.com/img/_Salamander--demo--03-salamander.png" alt="Project Salamander snapshot" /></div> -->
+			</div>
+		</section>
+		<section class="sec-contact" id="sec-contact">
+			<ul class="soc-media">
+				<li><a href="https://twitter.com/AlexDevero" class="fa fa-twitter" target="_blank"></a></li>
+				<li><a href="https://www.facebook.com/lex.devero" class="fa fa-facebook" target="_blank"></a></li>
+				<li><a href="http://postman0.deviantart.com/" class="fa fa-deviantart" target="_blank"></a></li>
+				<li><a href="https://www.behance.net/d3v3r0" class="fa fa-behance" target="_blank"></a></li>
+				<li><a href="mailto:deveroalex@gmail.com" class="fa fa-envelope"></a></li>
+			</ul>
+		</section>
+		<section class="sec-home" id="sec-home">
+			<div class="content">
+				<h1>Bem vindo ao nosso portfolio.</h1>
+				<h2><a href="#sec-about">Oque</a> Fizemos?</h2>
+				<h2><a href="#sec-portfolio">Como</a> fizemos ?</h2>
+				<h2><a href="#sec-contact">Realize</a> seu teste?</h2>
+			</div>
+		</section>
+		<nav role="navigation">
+			<label for="nav-check"></label>
+			<ul class="navigation">
+				<li><a href="#sec-home">Inicio</a></li>
+				<li><a href="#sec-about">Projeto</a></li>
+				<li><a href="#sec-portfolio">portfolio</a></li>
+				<li><a href="#sec-contact" id="register-link">register</a></li>
+				<!-- <li><a href="#sec-contact">register</a></li> -->
+			</ul>
+		</nav>
+	</div>
+</body>
+<script>
+	document.addEventListener("DOMContentLoaded", function() {
+		var registerLink = document.getElementById("register-link");
+		registerLink.addEventListener("click", function(event) {
+			event.preventDefault(); // Impede o comportamento padrão do link
 
-<section id="home" class="sec-home">
-  <div class="content">
-    <h1>Welcome to my website!</h1>
-    <p>Feel free to explore and learn more about me.</p>
-    <a href="#about">Learn More</a>
-  </div>
-</section>
+			// Redireciona para o conteúdo do arquivo register.html no mesmo servidor
+			window.location.href = "./register";
+		});
+	});
+</script>
 
-<section id="about" class="sec-about">
-  <div class="content">
-    <h2>About Me</h2>
-    <p>I am a passionate web developer with years of experience.</p>
-    <a href="#portfolio">View Portfolio</a>
-  </div>
-</section>
-
-<section id="portfolio" class="sec-portfolio">
-  <div class="content">
-    <h2>Portfolio</h2>
-    <div class="col-big">
-      <img src="portfolio-image1.jpg" alt="Portfolio Image 1">
-    </div>
-    <div class="col-big">
-      <img src="portfolio-image2.jpg" alt="Portfolio Image 2">
-    </div>
-    <div class="col-big">
-      <img src="portfolio-image3.jpg" alt="Portfolio Image 3">
-    </div>
-  </div>
-</section>
