@@ -287,12 +287,12 @@
 		<input type="checkbox" name="nav-check" id="nav-check" />
 		<section class="sec-about" id="sec-about">
 			<div class="content">
-				<h2>Projeto</h2>
-				<p>Este aplicativo foi construído utilizando AWS Lambda, API Gateway, DynamoDB e SQS.</p>
-				<p>Ele oferece um sistema de cadastro de senhas, onde os usuários podem enviar suas senhas e verificar se atendem aos requisitos de política de senhas.</p>
-				<p>Quando um usuário envia uma senha, ela é enviada para uma fila para processamento. Outra função Lambda processa a senha e verifica se ela está de acordo com a política de senhas. O resultado é armazenado em uma tabela do DynamoDB associada ao login do usuário.</p>
-				<p>Os usuários recebem uma notificação de sua senha em tempo real ou por email.</p>
-				<p>Este aplicativo demonstra o uso de tecnologias serverless para gerenciamento de senhas e mostra como os serviços da AWS podem ser integrados para criar aplicativos escaláveis e robustos.</p>
+				<h2>O Aplicativo:</h2>
+				<p>Foi construído utilizando AWS Lambda, API Gateway, s3 e SQS.</p>
+				<p>Demonstra o uso de tecnologias serverless para gerenciamento de senhas.</p>
+				<p>Oferece um sistema de cadastro, onde o usuário envia suas senhas e verifica se atendem aos requisitos.</p>
+				<p>Encaminha a senha recebida para uma fila, onde será recebida por outra função Lambda que fará a validação.</p>
+				<p>Encaminha ao e-mail do usuário, informaçãoes sobre o status do cadastro.</p>
 			</div>
 		</section>
 		<section class="sec-portfolio" id="sec-portfolio">
@@ -301,15 +301,15 @@
 					<h1 class="name" style="color: #fff">Fluxo Do projeto</h1>
 				</div>
 				<div class="flowchart">
-					<div class="col-big"><img src="https://resource.s3.localhost.localstack.cloud:4566/fluxograma.png" alt="Project Paraguay snapshot" style="width: 100vw;" /></div>
+					<div class="col-big"><img src="https://resource.s3.localhost.localstack.cloud:4566/fluxograma.png" alt="Project Paraguay snapshot" style="width: 100vw; height: 600px;" /></div>
 				</div>
-				<div class="explanation">
+				<!-- <div class="explanation">
 					<p>Quando o cliente acessa a rota gerada no deploy, nossa função lambda é acionada, retornando uma interface de página da web. Essa página possui links para facilitar o entendimento do projeto.</p>
 
 					<p>Como o projeto é focado em um sistema de cadastro de senhas, vamos falar mais sobre o registro. Após o cliente clicar em "Registrar", ele é redirecionado para a rota "/register", onde outra função lambda é ativada para retornar um HTML e receber os dados fornecidos nos campos, redirecionando em seguida para "/cadastro". O cadastro envia esses dados para um sistema de filas (SQS).</p>
 
 					<p>Uma função lambda, que já está na nuvem, é ativada sempre que uma mensagem chega ao SQS. Essa função processa a senha e salva o status em um banco de dados DynamoDB. Em seguida, obtemos essa resposta e a devolvemos ao cliente.</p>
-				</div>
+				</div> -->
 			</div>
 		</section>
 		<section class="sec-contact" id="sec-contact">
