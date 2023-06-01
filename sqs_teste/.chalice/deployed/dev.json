@@ -7,9 +7,17 @@
       "role_name": "sqs_teste-dev"
     },
     {
-      "name": "receive_message_sqs",
+      "name": "on_event",
       "resource_type": "lambda_function",
-      "lambda_arn": "arn:aws:lambda:us-east-1:000000000000:function:sqs_teste-dev-receive_message_sqs"
+      "lambda_arn": "arn:aws:lambda:us-east-1:000000000000:function:sqs_teste-dev-on_event"
+    },
+    {
+      "name": "on_event-sqs-event-source",
+      "resource_type": "sqs_event",
+      "queue_arn": "arn:aws:sqs:us-east-1:000000000000:passwords",
+      "event_uuid": "6c726b37-124d-49c6-8c7f-91591a659e15",
+      "queue": "passwords",
+      "lambda_arn": "arn:aws:lambda:us-east-1:000000000000:function:sqs_teste-dev-on_event"
     },
     {
       "name": "api_handler",
@@ -19,8 +27,8 @@
     {
       "name": "rest_api",
       "resource_type": "rest_api",
-      "rest_api_id": "4wtrtikjkr",
-      "rest_api_url": "https://4wtrtikjkr.execute-api.us-east-1.amazonaws.com/api/"
+      "rest_api_id": "2kxqb9e2bh",
+      "rest_api_url": "https://2kxqb9e2bh.execute-api.us-east-1.amazonaws.com/api/"
     }
   ],
   "schema_version": "2.0",

@@ -7,6 +7,9 @@ ENDPOINT_URL_RECEIVE = "http://host.docker.internal:4566/_aws/sqs/messages"
 QUEUE_URL = "http://queue.localhost.localstack.cloud:4566/000000000000"
 QUEUE_NAME = 'passwords'
 
+sns_client = boto3.client('sns', endpoint_url=ENDPOINT_URL_SEND)
+sns_topic_arn = 'arn:aws:sns:us-east-1:000000000000:topico-senha-sns'
+
 app = Chalice(app_name='ww')
 app.debug = True
 
@@ -29,18 +32,27 @@ def get_password_SQS(event):
 		password = record.body
 		return password
 
-@app.on_sqs_message(queue=QUEUE_NAME)
-def on_event(event):
-	try:
-		for record in event:
-			password = get_password_SQS(event)
-			app.log.debug("Password: %s", password)
-			if check_pass_word(password):
-				app.log.debug("Password Valida")
-			else:
-				app.log.debug("Senha errada rapa")
-	except Exception as e:
-		print(str(e))
+# @app.on_sqs_message(queue=QUEUE_NAME)
+# def on_event(event):
+# 	try:
+# 		for record in event:
+# 			password = get_password_SQS(event)
+# 			app.log.debug("Password: %s", password)
+# 			if check_pass_word(password):
+# 				# app.log.debug("Password Valida")
+# 				resposta = {
+# 					'message': 'Senha válida. Seu cadastro foi concluído com sucesso.'
+# 				}
+# 				sns_client.publish(
+# 					TopicArn=sns_topic_arn,
+# 					Message=json.dumps(resposta)
+# 				)
+# 				app.log.debug("Resposta enviada para o usuário. Status code: %s", response.status_code)
+# 				return {'message': 'Resposta enviada com sucesso'}
+# 			else:
+# 				app.log.debug("Senha errada rapa")
+# 	except Exception as e:
+# 		print(str(e))
 
 # app.log.debug("Received message with contents: %s", vars(record))
 # app.log.debug("Received message with contents wagratom: %s", record.eventSourceARN)
@@ -52,4 +64,7 @@ def on_event(event):
 # awslocal sqs receive-message --queue-url http://queue.localhost.localstack.cloud:4566/000000000000/passwords
 # awslocal sqs send-message --queue-url http://queue.localhost.localstack.cloud:4566/000000000000/passwords --message-body "transforma"
 
+
+# export LOCALSTACK_HOSTNAME=localhost
+# awslocal sns create-topic --name topico-senha-sns
 
