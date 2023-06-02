@@ -14,8 +14,8 @@
     {
       "name": "rest_api",
       "resource_type": "rest_api",
-      "rest_api_id": "aeooand735",
-      "rest_api_url": "https://aeooand735.execute-api.us-east-1.amazonaws.com/api/"
+      "rest_api_id": "vmu0srq6se",
+      "rest_api_url": "https://vmu0srq6se.execute-api.us-east-1.amazonaws.com/api/"
     }
   ],
   "schema_version": "2.0",

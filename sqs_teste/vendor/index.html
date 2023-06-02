@@ -2,6 +2,8 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 	<style>
 	:root {
 		--chocolate: #d2691e;
@@ -58,65 +60,9 @@
 		width: 60%;
 	}
 
-	/* Navigation */
-	nav {
-		float: right;
-		width: 5%;
-		min-height: 100%;
-		background: var(--darkSalmon);
-		color: #fff;
-		overflow: hidden;
-		transition: width 0.5s ease;
-	}
-
-	nav label {
-		display: block;
-		position: relative;
-		width: 100%;
-		padding: 0.25em 0;
-		height: 2.5em;
-		cursor: pointer;
-	}
-
-	nav label:before {
-		content: "\f0c9";
-		position: absolute;
-		width: 100%;
-		font-family: fontAwesome;
-		font-size: 2em;
-		text-align: center;
-		text-shadow: 2px 2px 0 #666;
-		transition: all 0.5s ease;
-	}
-
-	nav label:hover:before {
-		text-shadow: none;
-	}
-
 	:target {
 		z-index: 2;
 		opacity: 1;
-	}
-
-	/* Hiding mechanism */
-	input {
-		display: none;
-	}
-
-	input:checked ~ section {
-		width: 85%;
-	}
-
-	input:checked ~ nav {
-		width: 15%;
-	}
-
-	input:checked ~ nav > label:before {
-		content: "\f00d";
-	}
-
-	input:checked ~ nav > label + .navigation {
-		display: flex;
 	}
 
 	/* Sections */
@@ -125,7 +71,7 @@
 		top: 0;
 		left: 0;
 		z-index: 0;
-		width: 95%;
+		width: 100%;
 		min-height: 100%;
 		opacity: 0;
 		overflow: hidden;
@@ -143,8 +89,6 @@
 
 	/* Home */
 	.sec-home {
-		float: left;
-		position: relative;
 		background-image: url("https://42.fr/wp-content/uploads/2021/07/Background-RM-2000x1132.jpg");
 		background-size: cover;
 		background-repeat: no-repeat;
@@ -154,7 +98,6 @@
 	}
 
 	.sec-home a {
-		/* color: #eda790; */
 		color:#fff;
 		text-decoration-style: dashed;
 	}
@@ -193,66 +136,6 @@
 		overflow: hidden;
 	}
 
-	.sec-portfolio .col-big {
-		float: left;
-		position: relative;
-		width: 25%;
-		height: 20vw;
-	}
-
-	.sec-portfolio img {
-		display: block;
-		width: 100%;
-		height: 100%;
-		/* opacity: 0.1; */
-		transition: all 0.5s ease;
-	}
-
-	.sec-portfolio img:hover {
-		opacity: 1;
-	}
-
-	/* Contact */
-	.sec-contact {
-		background: var(--wheat);
-	}
-
-	.soc-media {
-		display: flex;
-		justify-content: center;
-		align-content: center;
-		align-items: center;
-		align-self: center;
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-	}
-
-	.soc-media li {
-		float: left;
-		}
-
-	.soc-media li:not(:first-child) a {
-		margin-left: 0.75em;
-	}
-
-	.soc-media a {
-		display: block;
-		color: #aaa;
-		font-size: 3em;
-		text-decoration: none;
-		transition: color 0.5s ease;
-	}
-
-	.soc-media a:hover {
-		color: #333;
-	}
-
-	.soc-media a:active {
-		color: #666;
-	}
 	/* edit */
 	.project {
 		display: flex;
@@ -268,6 +151,8 @@
 	.project .name {
 		font-size: 1.5em;
 		font-weight: bold;
+		margin-bottom: 50px;
+		margin-top: 20px;
 	}
 
 	.project .flowchart {
@@ -280,11 +165,27 @@
 		font-size: 1em;
 		color: #fff;
 	}
+
+	.color {
+		background-color: #000c18;
+	}
 	</style>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg p-0 color">
+	<img src="https://biolibre.fr/media/cache/articleMainImg/images/articles/school_42.jpeg" style="width: 60px; height: 50px;">
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+		<div class="navbar-nav">
+		<a class="nav-item nav-link active" href="#sec-home" style="color: #fff;">Home</a>
+		<a class="nav-item nav-link" href="#sec-about" style="color: #fff;">Project</a>
+		<a class="nav-item nav-link" href="#sec-portfolio" style="color: #fff;">Apresentação</a>
+		</div>
+	</div>
+	</nav>
 	<div class="wrapper">
-		<input type="checkbox" name="nav-check" id="nav-check" />
 		<section class="sec-about" id="sec-about">
 			<div class="content">
 				<h2>O Aplicativo:</h2>
@@ -301,25 +202,9 @@
 					<h1 class="name" style="color: #fff">Fluxo Do projeto</h1>
 				</div>
 				<div class="flowchart">
-					<div class="col-big"><img src="https://resource.s3.localhost.localstack.cloud:4566/fluxograma2.png" alt="Project Paraguay snapshot" style="width: 100vw; height: 50vw;" /></div>
+					<div class="col-big"><img src="https://resource.s3.localhost.localstack.cloud:4566/fluxograma2.png" alt="Project Paraguay snapshot" style="width: 85%;" /></div>
 				</div>
-				<!-- <div class="explanation">
-					<p>Quando o cliente acessa a rota gerada no deploy, nossa função lambda é acionada, retornando uma interface de página da web. Essa página possui links para facilitar o entendimento do projeto.</p>
-
-					<p>Como o projeto é focado em um sistema de cadastro de senhas, vamos falar mais sobre o registro. Após o cliente clicar em "Registrar", ele é redirecionado para a rota "/register", onde outra função lambda é ativada para retornar um HTML e receber os dados fornecidos nos campos, redirecionando em seguida para "/cadastro". O cadastro envia esses dados para um sistema de filas (SQS).</p>
-
-					<p>Uma função lambda, que já está na nuvem, é ativada sempre que uma mensagem chega ao SQS. Essa função processa a senha e salva o status em um banco de dados DynamoDB. Em seguida, obtemos essa resposta e a devolvemos ao cliente.</p>
-				</div> -->
 			</div>
-		</section>
-		<section class="sec-contact" id="sec-contact">
-			<ul class="soc-media">
-				<li><a href="https://twitter.com/AlexDevero" class="fa fa-twitter" target="_blank"></a></li>
-				<li><a href="https://www.facebook.com/lex.devero" class="fa fa-facebook" target="_blank"></a></li>
-				<li><a href="http://postman0.deviantart.com/" class="fa fa-deviantart" target="_blank"></a></li>
-				<li><a href="https://www.behance.net/d3v3r0" class="fa fa-behance" target="_blank"></a></li>
-				<li><a href="mailto:deveroalex@gmail.com" class="fa fa-envelope"></a></li>
-			</ul>
 		</section>
 		<section class="sec-home" id="sec-home">
 			<div class="content">
@@ -329,14 +214,6 @@
 				<h2><a href="#sec-contact" id="register-link">Realize</a> seu teste?</h2>
 			</div>
 		</section>
-		<nav role="navigation">
-			<label for="nav-check"></label>
-			<ul class="navigation">
-				<li><a href="#sec-home">Inicio</a></li>
-				<li><a href="#sec-about">Projeto</a></li>
-				<li><a href="#sec-portfolio">portfolio</a></li>
-			</ul>
-		</nav>
 	</div>
 </body>
 <script>
@@ -344,7 +221,7 @@
 		var registerLink = document.getElementById("register-link");
 		registerLink.addEventListener("click", function(event) {
 			event.preventDefault(); // Impede o comportamento padrão do link
-
+			console.log("register-link clicked");
 			// Redireciona para o conteúdo do arquivo register.html no mesmo servidor
 			window.location.href = "./register";
 		});
