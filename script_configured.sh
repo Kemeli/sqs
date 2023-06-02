@@ -21,4 +21,4 @@ cd ../sqs_teste
 chalice-local deploy
 
 awslocal s3api create-bucket --bucket resource
-awslocal s3 cp ./vendor/fluxograma.png s3://resource/fluxograma.png
+awslocal s3 cp ./vendor/fluxograma.png s3://resource/fluxograma2.png
