@@ -4,130 +4,121 @@
 <!-- Template from https://getbootstrap.com/docs/4.3/getting-started/introduction/ -->
 
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <style>
-     body {
-            background-image: url("https://42.fr/wp-content/uploads/2021/07/Background-RM-2000x1132.jpg");
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
-    .transparent{
-      background-color: rgba(5, 3, 14, 0.5);;
-      border-color: transparent;
-      color: whitesmoke; /* opcional - define a cor do texto para legibilidade */
-    }
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<style>
+			body {
+				background-image: url("https://42.fr/wp-content/uploads/2021/07/Background-RM-2000x1132.jpg");
+				background-size: cover;
+				background-repeat: no-repeat;
+			}
+			.transparent{
+				background-color: rgba(5, 3, 14, 0.5);;
+				border-color: transparent;
+				color: whitesmoke; /* opcional - define a cor do texto para legibilidade */
+			}
 
-    .no-background {
-      background-color: transparent !important;
-      border-color: transparent !important;
-      box-shadow: none !important;
-    }
-    .no-background:focus {
-      background-color: transparent !important;
-      border-color: transparent !important;
-      box-shadow: none !important;
-    }
+			.no-background {
+				background-color: transparent !important;
+				border-color: transparent !important;
+				box-shadow: none !important;
+			}
+			.no-background:focus {
+				background-color: transparent !important;
+				border-color: transparent !important;
+				box-shadow: none !important;
+			}
 
-    .custom-input {
-      color: whitesmoke !important; /* Altere a cor do texto aqui */
-    }
+			.custom-input {
+				color: whitesmoke !important; /* Altere a cor do texto aqui */
+			}
 
-    .custom-input:focus {
-      color: whitesmoke !important;
-    }
+			.custom-input:focus {
+				color: whitesmoke !important;
+			}
 
-    .custom-input:not(:focus) {
-      color: whitesmoke !important;
-    }
+			.custom-input:not(:focus) {
+				color: whitesmoke !important;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="card m-2 p-0 transparent">
+			<img src="https://biolibre.fr/media/cache/articleMainImg/images/articles/school_42.jpeg"
+			alt="logo 42" class="card-img-top w-25">
+			<div class="card-body">
+				<h5 class="card-title">System KWS Register</h5>
+			</div>
+		</div>
 
-  </style>
-  </head>
-  <body>
+		<!-- Main form -->
+		<div class="card card-body transparent">
+			<div class="card-body">
+				<form method="POST">
+					<div class="form-group">
+						<label for="name">Name</label>
+						<input type="name" class="form-control transparent no-background custom-input" id="Login"  placeholder="Your name">
+					</div>
 
-    <div class="card m-2 p-0 transparent">
-      <img src="https://biolibre.fr/media/cache/articleMainImg/images/articles/school_42.jpeg"
-        alt="logo 42" class="card-img-top w-25">
-      <div class="card-body">
-        <h5 class="card-title">System KWS Register</h5>
-      </div>
-    </div>
+					<div class="form-group">
+						<label for="password">password</label>
+						<input type="password" class="form-control transparent no-background custom-input" id="Senha"  placeholder="Your password">
+					</div>
 
-    <!-- Main form -->
-  <div class="card card-body transparent">
-    <div class="card-body">
-    <form method="POST">
+					<div class="form-group">
+						<label for="email">Email address</label>
+						<input type="email" class="form-control transparent no-background custom-input" id="Email"  placeholder="Enter email">
+					</div>
 
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="name" class="form-control transparent no-background custom-input" id="Login"  placeholder="Your name">
-        </div>
+					<h4 id="response"></h4>
+					<button type="submit" class="btn btn-success">Submit</button>
+				</form>
+			</div>
+		</div>
+		<script>
+			(() => {
+				const form = document.querySelector('form');
+				const submitResponse = document.querySelector('#response');
+				form.onsubmit = e => {
+					e.preventDefault();
 
-        <div class="form-group">
-            <label for="password">password</label>
-            <input type="password" class="form-control transparent no-background custom-input" id="Senha"  placeholder="Your password">
-        </div>
+					// Capture the form data
+					let data = {};
+					Array.from(form).map(input => (data[input.id] = input.value));
+					console.log('Sending: ', JSON.stringify(data));
+					submitResponse.innerHTML = 'Sending...'
 
-        <div class="form-group">
-          <label for="email">Email address</label>
-          <input type="email" class="form-control transparent no-background custom-input" id="Email"  placeholder="Enter email">
-        </div>
+					// Create the AJAX request
+					var xhr = new XMLHttpRequest();
+					xhr.open(form.method, '/api/cadastro');
+					xhr.setRequestHeader('Accept', 'application/json; charset=utf-8');
+					xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 
-      <h4 id="response"></h4>
-      <button type="submit" class="btn btn-success">Submit</button>
-    </form>
-    </div>
-  </div>
+					// Send the collected data as JSON
+					xhr.send(JSON.stringify(data));
 
-  <script>
-    (() => {
-      const form = document.querySelector('form');
-      const submitResponse = document.querySelector('#response');
-
-      form.onsubmit = e => {
-        e.preventDefault();
-
-        // Capture the form data
-        let data = {};
-        Array.from(form).map(input => (data[input.id] = input.value));
-        console.log('Sending: ', JSON.stringify(data));
-        submitResponse.innerHTML = 'Sending...'
-
-        // Create the AJAX request
-        var xhr = new XMLHttpRequest();
-        xhr.open(form.method, '/api/cadastro');
-        xhr.setRequestHeader('Accept', 'application/json; charset=utf-8');
-        xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-
-        // Send the collected data as JSON
-        xhr.send(JSON.stringify(data));
-
-        xhr.onloadend = response => {
-          if (response.target.status === 200) {
-            form.reset();
-            submitResponse.innerHTML =
-              `<span class="text-info">Sua solicitação está sendo processada!</br>
-               Enviaremos o resultado para: </span>
-               <em class="text-danger">
-                ${data['Email']}</em>`;
-          } else {
-            submitResponse.innerHTML = 'Error! Please try again.';
-            console.error(JSON.parse(response));
-          }
-        };
-      };
-    })();
-  </script>
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+					xhr.onloadend = response => {
+						if (response.target.status === 200) {
+							form.reset();
+							submitResponse.innerHTML =
+								`<span class="text-info">Sua solicitação está sendo processada!</br>
+								 Enviaremos o resultado para: </span>
+								 <em class="text-danger">
+								${data['Email']}</em>`;
+						} else {
+						submitResponse.innerHTML = 'Error! Please try again.';
+						console.error(JSON.parse(response));
+						}
+					};
+				};
+			})();
+		</script>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	</body>
 </html>
